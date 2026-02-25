@@ -1,0 +1,148 @@
+/* --- 1. Reset & Variables --- */
+:root {
+    --google-blue: #4285F4;
+    --google-red: #EA4335;
+    --google-yellow: #FBBC04;
+    --google-green: #34A853;
+    --text-dark: #3C4043;
+    --text-light: #5F6368;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-dark);
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+/* --- 2. Navigation --- */
+.navbar {
+    height: 70px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.logo img {
+    height: 32px; /* THIS FIXES THE GIANT LOGO */
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--google-blue);
+}
+
+.btn-signup {
+    background: var(--google-blue);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+/* --- 3. Hero Section --- */
+.hero {
+    padding: 100px 5%;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.blue { color: var(--google-blue); }
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin: 10px;
+}
+
+.btn-primary { background: var(--google-blue); color: white; }
+.btn-outline { border: 2px solid var(--google-blue); color: var(--google-blue); }
+
+/* --- 4. Cards --- */
+.info-section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    padding: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+.dot { height: 10px; width: 40px; border-radius: 20px; margin-bottom: 20px; }
+.red { background: var(--google-red); }
+.green { background: var(--google-green); }
+.blue { background: var(--google-blue); }
+
+footer {
+    text-align: center;
+    padding: 50px;
+    border-top: 1px solid #eee;
+    color: var(--text-light);
+}
