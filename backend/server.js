@@ -1,15 +1,15 @@
-const cors = require('cors'); // Add this
-app.use(cors()); // Add this
-
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');   // ✅ keep this
 const connectDB = require('./db'); 
 const User = require('./models/User'); 
 const EventRegistration = require('./models/Event'); 
 
-const app = express();
+const app = express();          // ✅ app created FIRST
+
+app.use(cors());                // ✅ moved here (ONLY CHANGE)
 
 // 1. Connect to Cloud MongoDB Atlas
 connectDB(); 
@@ -18,15 +18,12 @@ connectDB();
 app.use(bodyParser.json());
 
 // 3. Static File Mapping (Optimized for your folder structure)
-// This ensures images, scripts, and styles load perfectly
 app.use('/images', express.static(path.join(__dirname, '../frontend/images')));
 app.use('/js', express.static(path.join(__dirname, '../frontend/js')));
-// Serves your HTML and CSS from the folder where you kept them
 app.use(express.static(path.join(__dirname, '../frontend/css')));
 
 // 4. API ROUTES
 
-// SIGNUP: Create new community member
 app.post('/api/signup', async (req, res) => {
     try {
         const newUser = new User(req.body);
@@ -37,7 +34,6 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
-// LOGIN: Authenticate existing member
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -52,7 +48,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// EVENT REGISTRATION: Store student registration data
 app.post('/api/event-register', async (req, res) => {
     try {
         const newReg = new EventRegistration(req.body);
@@ -70,7 +65,6 @@ app.get('/', (req, res) => {
 });
 
 // 6. START SERVER
-// This uses PORT 5000 from your .env file
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`\n==========================================`);
