@@ -67,7 +67,7 @@
             studentId: e.target[2].value,
             password: e.target[3].value
         };
-        const res = await fetch('/api/signup', {
+        fetch('https://google-developer-group-website.onrender.com/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
