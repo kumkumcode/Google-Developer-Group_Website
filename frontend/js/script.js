@@ -7,7 +7,6 @@ function filterEvents(category) {
         
         if (category === 'all' || cardCategory === category) {
             card.style.display = 'block';
-            // Reset opacity so filtered cards aren't invisible
             card.style.opacity = "1";
             card.style.transform = "translateY(0)";
         } else {
@@ -18,8 +17,11 @@ function filterEvents(category) {
     // Update active button visual state
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
-    if (event) {
-        event.currentTarget.classList.add('active');
+
+    // MOBILE FIX: Check if event exists before accessing currentTarget
+    const currentEvent = window.event || arguments.callee.caller.arguments[0];
+    if (currentEvent && currentEvent.currentTarget) {
+        currentEvent.currentTarget.classList.add('active');
     }
 }
 
@@ -28,7 +30,6 @@ window.addEventListener("scroll", function() {
     const cards = document.querySelectorAll(".event-card");
 
     cards.forEach(card => {
-        // Only animate if the card is actually visible (not hidden by filter)
         if (card.style.display !== 'none') {
             const position = card.getBoundingClientRect().top;
             const screenPosition = window.innerHeight / 1.3;
@@ -51,6 +52,7 @@ function toggleConfirmPassword() {
     const pass = document.getElementById("confirm-password");
     if (pass) pass.type = pass.type === "password" ? "text" : "password";
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll('.event-row-card');
     cards.forEach((card, index) => {
@@ -58,12 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Keeping your second filterEvents function exactly as provided but adding the same mobile fix
 function filterEvents(category) {
     const cards = document.querySelectorAll('.event-row-card');
     const buttons = document.querySelectorAll('.filter-btn');
 
     buttons.forEach(btn => btn.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    
+    // MOBILE FIX: Check if event exists
+    const currentEvent = window.event || (arguments.callee.caller ? arguments.callee.caller.arguments[0] : null);
+    if (currentEvent && currentEvent.currentTarget) {
+        currentEvent.currentTarget.classList.add('active');
+    }
 
     cards.forEach(card => {
         card.style.display = 'none'; // Hide all
