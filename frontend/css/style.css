@@ -146,3 +146,33 @@ footer {
     border-top: 1px solid #eee;
     color: var(--text-light);
 }
+/* --- MOBILE RESCUE FIXES --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.8rem !important; letter-spacing: -1px !important; }
+    .uni-name { font-size: 1.2rem !important; }
+    .hero p { font-size: 1rem !important; }
+    nav { padding: 0 5% !important; height: 60px !important; }
+    .nav-links { display: none; } /* Hides menu on mobile to prevent overlap */
+    
+    /* Fix for Bento and Grid sections */
+    .mission-section, .diff-section, .team-grid, .benefit-grid {
+        flex-direction: column !important;
+        padding: 50px 5% !important;
+        gap: 30px !important;
+    }
+    
+    .diff-img img, .member-card, .stat-card {
+        width: 100% !important;
+    }
+
+    /* Fix for Events Timeline */
+    .event-card, .event-card:nth-child(even) {
+        flex-direction: column !important;
+        margin-bottom: 50px !important;
+    }
+    .event-img, .event-content {
+        width: 100% !important;
+        margin: 10px 0 !important;
+    }
+    .timeline::before { left: 10px !important; }
+}
