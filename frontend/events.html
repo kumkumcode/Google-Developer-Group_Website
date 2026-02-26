@@ -260,35 +260,39 @@
         document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
     }, 1000);
 
-    // FIXED REGISTRATION FORM LOGIC - Changed URL to event-register
+    // FIXED REGISTRATION FORM LOGIC
     document.getElementById('regForm').onsubmit = async function(e) {
         e.preventDefault();
         
+        // Grab values directly by their index based on your HTML order
         const data = {
             eventTitle: document.getElementById('regTitle').innerText,
-            studentName: e.target[0].value,
-            studentEmail: e.target[1].value,
-            semester: e.target[2].value,
-            branch: e.target[3].value
+            studentName: e.target.elements[0].value,
+            studentEmail: e.target.elements[1].value,
+            semester: e.target.elements[2].value,
+            branch: e.target.elements[3].value
         };
         
         try {
-            const res = await fetch('https://google-developer-group-website.onrender.com/api/event-register', {
+            // Updated to your specific Render URL
+            const res = await fetch('https://google-developer-group-website-1.onrender.com/api/event-register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
             
-            if(res.ok) {
-                alert("🚀 Registration successful!");
+            const result = await res.json();
+            
+            if(res.status === 201 || result.success) {
+                alert("🚀 Registration successful! See you there.");
                 closeAll();
                 e.target.reset();
             } else {
-                alert("❌ Server Error. Please try again later.");
+                alert("❌ Server Error: " + (result.message || "Could not save registration."));
             }
         } catch (err) {
-            console.error(err);
-            alert("❌ Connection Error. Is your server running?");
+            console.error("Fetch Error:", err);
+            alert("❌ Connection Error. Please check if your Render server is awake.");
         }
     };
 </script>
